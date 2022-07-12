@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                   margin: const EdgeInsets.only(top: 10),
                   child: ElevatedButton(
                       child: const Text("Login"),
-                      onPressed: () => {postRequest(_code)}),
+                      onPressed: () => {postLoginApi(_code)}),
                 )
               ],
             )
@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Future<http.Response> postRequest(String code) async {
+  Future<http.Response> postLoginApi(String code) async {
     var url = 'http://10.0.2.2:9090/api/users/login';
 
     Map<String, dynamic> data = {'code': code};
@@ -92,6 +92,7 @@ class _LoginState extends State<Login> {
         await http.post(Uri.parse(url), headers: headers, body: body);
 
     print("Response statusCode : ${response.statusCode}");
+    print("----------------------------------------------");
     print("Response Body : ${response.body}");
 
     return response;
